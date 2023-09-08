@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <style>
+        canvas{
+            background-color: black;
+        }
+        body{
+                background-color: white;
+            }
+    </style>
+
+    <body>
+
+        <center>
+            <canvas width="550" height="700" id="myCanvas"></canvas>
+        </center>
+
+        <script>
+
+            var canvas = document.getElementById('myCanvas');
+            var ctx = canvas.getContext('2d');
+            let score = 0;
+
+            function roundedRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.moveTo(x, y + radius);
+            ctx.arcTo(x, y + height, x + radius, y + height, radius);
+            ctx.arcTo(x + width, y + height, x + width, y + height - radius, radius);
+            ctx.arcTo(x + width, y, x + width - radius, y, radius);
+            ctx.arcTo(x, y, x, y + radius, radius);
+            ctx.stroke();
+        }
+
+            // puntos
+            // ctx.fillStyle = "yellow";
+            // ctx.beginPath();
+            // ctx.arc(101, 102, 2, 0, Math.PI * 2, true);
+            // ctx.fill();
+
+            // ctx.beginPath();
+            // ctx.arc(89, 102, 2, 0, Math.PI * 2, true);
+            // ctx.fill();
+
+            // pacman
+            // ctx.beginPath();
+            // ctx.arc(37, 37, 13, Math.PI / 7, -Math.PI / 7, false);
+            // ctx.lineTo(31, 37);
+            // ctx.fill();
+
+            //cubos
+            //1
+            ctx.beginPath();
+            roundedRect(ctx, 70, 55, 50, 50, 10);
+            ctx.strokeStyle="blue";
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            roundedRect(ctx, 170, 55, 70, 50, 10);
+            ctx.strokeStyle="blue";
+            ctx.stroke();
+            ctx.closePath();
+            
+            ctx.beginPath();
+            roundedRect(ctx, 320, 55, 70, 50, 10);
+            ctx.strokeStyle="blue";
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            roundedRect(ctx, 430, 55, 50, 50, 10);
+            ctx.strokeStyle="blue";
+            ctx.stroke();
+            ctx.closePath();
+
+            //2
+            ctx.beginPath();
+            roundedRect(ctx, 70, 170, 50, 20, 10);
+            ctx.strokeStyle="blue";
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            roundedRect(ctx, 170, 170, 20, 120, 10);
+            ctx.strokeStyle="blue";
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            roundedRect(ctx, 190, 225, 50, 20, 10);
+            ctx.strokeStyle="blue";
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            roundedRect(ctx, 235, 170, 100, 20, 10);
+            ctx.strokeStyle="blue";
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            roundedRect(ctx, 275, 190, 20, 55, 10);
+            ctx.strokeStyle="blue";
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            roundedRect(ctx, 320, 225, 50, 20, 10);
+            ctx.strokeStyle="blue";
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            roundedRect(ctx, 370, 170, 20, 120, 10);
+            ctx.strokeStyle="blue";
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            roundedRect(ctx, 430, 170, 50, 20, 10);
+            ctx.strokeStyle="blue";
+            ctx.stroke();
+            ctx.closePath();
+
+            //3
+            ctx.beginPath();
+            roundedRect(ctx, 170, 360, 20, 120, 10);
+            ctx.strokeStyle="blue";
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            roundedRect(ctx, 370, 360, 20, 120, 10);
+            ctx.strokeStyle="blue";
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            roundedRect(ctx, 235, 480, 100, 20, 10);
+            ctx.strokeStyle="blue";
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            roundedRect(ctx, 275, 500, 20, 55, 10);
+            ctx.strokeStyle="blue";
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            roundedRect(ctx, 170, 530, 50, 20, 10);
+            ctx.strokeStyle="blue";
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            roundedRect(ctx, 340, 530, 50, 20, 10);
+            ctx.strokeStyle="blue";
+            ctx.stroke();
+            ctx.closePath();
+
+
+
+
+
+    
+        </script>
+
+    </body>
+
+</html>
