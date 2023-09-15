@@ -16,328 +16,370 @@
             <canvas width="700" height="500" id="myCanvas"></canvas>
         </center>
 
+        <img src="minions_PNG54.png" id="mi_imagen" style="display: none;" alt="">
+
         <script>
 
-            var canvas = document.getElementById('myCanvas');
-            var ctx = canvas.getContext('2d');
-            let score = 0;
+                var canvas = document.getElementById('myCanvas');
+                var ctx = canvas.getContext('2d');
+                
+                var img = new Image();
+                img.src = "minions_PNG54.png";
+
+                // Posición inicial de la imagen
+                let x = 20;
+                let y = 20;
+
+                // Velocidad de movimiento
+                const velocidad = 5;
+
+                window.requestAnimationFrame = (function () {
+                    return window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                    function (callback) {
+                window.setTimeout(callback, 17);
+                };
+
+            }());
+
+                // puntos
+                // ctx.fillStyle = "yellow";
+                // ctx.beginPath();
+                // ctx.arc(101, 102, 2, 0, Math.PI * 2, true);
+                // ctx.fill();
+
+                // ctx.beginPath();
+                // ctx.arc(89, 102, 2, 0, Math.PI * 2, true);
+                // ctx.fill();
+
+            function margen(ctx){
+                    ctx.lineWidth = 5;
+                    ctx.strokeStyle = "blue";
+
+                    //margen
+                    ctx.beginPath();
+                    ctx.moveTo(5,5);
+                    ctx.lineTo(5,495);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(5,496);
+                    ctx.lineTo(695,495);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(696,496);
+                    ctx.lineTo(696,5);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(695,5);
+                    ctx.lineTo(5,5);
+                    ctx.stroke();
+
+                    //margen pequeño
+                    //lados
+                    ctx.lineWidth = 2.5;
+                    ctx.beginPath();
+                    ctx.moveTo(15,15);
+                    ctx.lineTo(15,485);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(685,485);
+                    ctx.lineTo(685,15);
+                    ctx.stroke();
+
+                    //arriba
+                    ctx.beginPath();
+                    ctx.moveTo(15,15);
+                    ctx.lineTo(200,15);
+                    ctx.stroke();
+                    //
+                    ctx.beginPath();
+                    ctx.moveTo(201,15);
+                    ctx.lineTo(201,65);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(201,65);
+                    ctx.lineTo(222,65);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(222,65);
+                    ctx.lineTo(222,15);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(223,15);
+                    ctx.lineTo(470,15);
+                    ctx.stroke();
+
+                    //
+                    ctx.beginPath();
+                    ctx.moveTo(471,15);
+                    ctx.lineTo(471,65);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(471,65);
+                    ctx.lineTo(492,65);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(492,65);
+                    ctx.lineTo(492,15);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(492,15);
+                    ctx.lineTo(688,15);
+                    ctx.stroke();
+            
+
+                    //abajo
+                    ctx.beginPath();
+                    ctx.moveTo(15,485);
+                    ctx.lineTo(200,485);
+                    ctx.stroke();
+                    //
+                    ctx.beginPath();
+                    ctx.moveTo(201,485);
+                    ctx.lineTo(201,438);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(202,438);
+                    ctx.lineTo(222,438);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(223,439);
+                    ctx.lineTo(223,485);
+                    ctx.stroke();
+
+                    //
+                    ctx.beginPath();
+                    ctx.moveTo(224,485);
+                    ctx.lineTo(470,485);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(471,485);
+                    ctx.lineTo(472,438);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(473,438);
+                    ctx.lineTo(494,438);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(495,439);
+                    ctx.lineTo(495,485);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(496,485);
+                    ctx.lineTo(685,485);
+                    ctx.stroke();
+
+                    //L
+                    ctx.beginPath();
+                    ctx.moveTo(60,65);
+                    ctx.lineTo(60,150);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(60,65);
+                    ctx.lineTo(120,65);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(120,65);
+                    ctx.lineTo(120,85);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(120,85);
+                    ctx.lineTo(80,85);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(80,85);
+                    ctx.lineTo(80,150);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(80,150);
+                    ctx.lineTo(60,150);
+                    ctx.stroke();
+
+
+                    //
+                    ctx.beginPath();
+                    ctx.moveTo(60,430);
+                    ctx.lineTo(120,430);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(60,430);
+                    ctx.lineTo(60,330);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(60,330);
+                    ctx.lineTo(80,330);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(80,330);
+                    ctx.lineTo(80,410);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(80,410);
+                    ctx.lineTo(120,410);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(120,410);
+                    ctx.lineTo(120,430);
+                    ctx.stroke();
+
+                    //
+                    ctx.beginPath();
+                    ctx.moveTo(640,65);
+                    ctx.lineTo(640,150);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(640,65);
+                    ctx.lineTo(580,65);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(580,65);
+                    ctx.lineTo(580,85);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(580,85);
+                    ctx.lineTo(620,85);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(620,85);
+                    ctx.lineTo(620,150);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(620,150);
+                    ctx.lineTo(640,150);
+                    ctx.stroke();
+
+                    //
+                    ctx.beginPath();
+                    ctx.moveTo(640,430);
+                    ctx.lineTo(640,330);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(640,430);
+                    ctx.lineTo(580,430);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(580,430);
+                    ctx.lineTo(580,410);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(580,410);
+                    ctx.lineTo(620,410);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(620,410);
+                    ctx.lineTo(620,330);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(620,330);
+                    ctx.lineTo(640,330);
+                    ctx.stroke();
+
+                    //cuadro
+                    
+                } 
+
+                function drawRoundedRectangles(ctx, rectangles) {
+                    
+                    rectangles.forEach(function(rect) {
+                        ctx.beginPath();
+                        roundedRect(ctx, rect.x, rect.y, rect.width, rect.height, rect.radius);
+                        ctx.stroke();
+                        ctx.closePath();
+                    });
+            }
+
+            var rectangles = [
+                { x: 260, y: 60, width: 170, height: 15, radius: 10 },
+                { x: 260, y: 435, width: 170, height: 15, radius: 10 },
+                { x: 165, y: 130, width: 59, height: 20, radius: 10 },
+                { x: 470, y: 130, width: 59, height: 20, radius: 10 },
+                { x: 165, y: 330, width: 59, height: 20, radius: 10 },
+                { x: 470, y: 330, width: 59, height: 20, radius: 10 },
+
+            ];
+
 
             function roundedRect(ctx, x, y, width, height, radius) {
-            ctx.beginPath();
-            ctx.moveTo(x, y + radius);
-            ctx.arcTo(x, y + height, x + radius, y + height, radius);
-            ctx.arcTo(x + width, y + height, x + width, y + height - radius, radius);
-            ctx.arcTo(x + width, y, x + width - radius, y, radius);
-            ctx.arcTo(x, y, x, y + radius, radius);
-            ctx.stroke();
-        }
-
-            // puntos
-            // ctx.fillStyle = "yellow";
-            // ctx.beginPath();
-            // ctx.arc(101, 102, 2, 0, Math.PI * 2, true);
-            // ctx.fill();
-
-            // ctx.beginPath();
-            // ctx.arc(89, 102, 2, 0, Math.PI * 2, true);
-            // ctx.fill();
-
-            // pacman
-            // ctx.beginPath();
-            // ctx.fillStyle = "yellow";
-            // ctx.arc(50, 50, 13, Math.PI / 7, -Math.PI / 7, false);
-            // ctx.lineTo(31, 37);
-            // ctx.fill();
-
-
-            if(ctx){
-                ctx.lineWidth = 5;
-                ctx.strokeStyle = "blue";
-
-                //margen
                 ctx.beginPath();
-                ctx.moveTo(5,5);
-                ctx.lineTo(5,495);
+                ctx.moveTo(x, y + radius);
+                ctx.arcTo(x, y + height, x + radius, y + height, radius);
+                ctx.arcTo(x + width, y + height, x + width, y + height - radius, radius);
+                ctx.arcTo(x + width, y, x + width - radius, y, radius);
+                ctx.arcTo(x, y, x, y + radius, radius);
                 ctx.stroke();
+            }
 
-                ctx.beginPath();
-                ctx.moveTo(5,496);
-                ctx.lineTo(695,495);
-                ctx.stroke();
+    
+            function drawImg() {
+            ctx.clearRect(x, y, 35, 35);
+            ctx.drawImage(img, x, y, 35, 35);
+            requestAnimationFrame(drawImg);
+            }
 
-                ctx.beginPath();
-                ctx.moveTo(696,496);
-                ctx.lineTo(696,5);
-                ctx.stroke();
+            img.onload = function () {
+                drawImg();
+            };
 
-                ctx.beginPath();
-                ctx.moveTo(695,5);
-                ctx.lineTo(5,5);
-                ctx.stroke();
+            // Manejar eventos de teclado
+            document.addEventListener("keydown", function (e) {
+                switch(e.keyCode){
+                        case 87:
+                            y -=velocidad;
+                        break;
 
-                //margen pequeño
-                //lados
-                ctx.lineWidth = 2.5;
-                ctx.beginPath();
-                ctx.moveTo(15,15);
-                ctx.lineTo(15,485);
-                ctx.stroke();
+                        case 83:
+                            y +=velocidad;
+                        break;
 
-                ctx.beginPath();
-                ctx.moveTo(685,485);
-                ctx.lineTo(685,15);
-                ctx.stroke();
+                        case 68:
+                            x +=velocidad;
+                        break;
 
-                //arriba
-                ctx.beginPath();
-                ctx.moveTo(15,15);
-                ctx.lineTo(200,15);
-                ctx.stroke();
-                //
-                ctx.beginPath();
-                ctx.moveTo(201,15);
-                ctx.lineTo(201,65);
-                ctx.stroke();
+                        case 65:
 
-                ctx.beginPath();
-                ctx.moveTo(201,65);
-                ctx.lineTo(222,65);
-                ctx.stroke();
+                            x -=velocidad;
+                        break;
+                    }
+            });
 
-                ctx.beginPath();
-                ctx.moveTo(222,65);
-                ctx.lineTo(222,15);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(223,15);
-                ctx.lineTo(470,15);
-                ctx.stroke();
-
-                //
-                ctx.beginPath();
-                ctx.moveTo(471,15);
-                ctx.lineTo(471,65);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(471,65);
-                ctx.lineTo(492,65);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(492,65);
-                ctx.lineTo(492,15);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(492,15);
-                ctx.lineTo(688,15);
-                ctx.stroke();
-           
-
-                //abajo
-                ctx.beginPath();
-                ctx.moveTo(15,485);
-                ctx.lineTo(200,485);
-                ctx.stroke();
-                //
-                ctx.beginPath();
-                ctx.moveTo(201,485);
-                ctx.lineTo(201,438);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(202,438);
-                ctx.lineTo(222,438);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(223,439);
-                ctx.lineTo(223,485);
-                ctx.stroke();
-
-                //
-                ctx.beginPath();
-                ctx.moveTo(224,485);
-                ctx.lineTo(470,485);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(471,485);
-                ctx.lineTo(472,438);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(473,438);
-                ctx.lineTo(494,438);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(495,439);
-                ctx.lineTo(495,485);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(496,485);
-                ctx.lineTo(685,485);
-                ctx.stroke();
-
-                //L
-                ctx.beginPath();
-                ctx.moveTo(60,65);
-                ctx.lineTo(60,150);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(60,65);
-                ctx.lineTo(120,65);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(120,65);
-                ctx.lineTo(120,85);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(120,85);
-                ctx.lineTo(80,85);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(80,85);
-                ctx.lineTo(80,150);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(80,150);
-                ctx.lineTo(60,150);
-                ctx.stroke();
-
-
-                //
-                ctx.beginPath();
-                ctx.moveTo(60,430);
-                ctx.lineTo(120,430);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(60,430);
-                ctx.lineTo(60,330);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(60,330);
-                ctx.lineTo(80,330);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(80,330);
-                ctx.lineTo(80,410);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(80,410);
-                ctx.lineTo(120,410);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(120,410);
-                ctx.lineTo(120,430);
-                ctx.stroke();
-
-                //
-                ctx.beginPath();
-                ctx.moveTo(640,65);
-                ctx.lineTo(640,150);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(640,65);
-                ctx.lineTo(580,65);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(580,65);
-                ctx.lineTo(580,85);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(580,85);
-                ctx.lineTo(620,85);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(620,85);
-                ctx.lineTo(620,150);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(620,150);
-                ctx.lineTo(640,150);
-                ctx.stroke();
-
-                //
-                ctx.beginPath();
-                ctx.moveTo(640,430);
-                ctx.lineTo(640,330);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(640,430);
-                ctx.lineTo(580,430);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(580,430);
-                ctx.lineTo(580,410);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(580,410);
-                ctx.lineTo(620,410);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(620,410);
-                ctx.lineTo(620,330);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.moveTo(620,330);
-                ctx.lineTo(640,330);
-                ctx.stroke();
-
-                //cuadro
-                
-
-
-
-
-            } 
-
-            function drawRoundedRectangles(ctx, rectangles) {
-                
-                rectangles.forEach(function(rect) {
-                    ctx.beginPath();
-                    roundedRect(ctx, rect.x, rect.y, rect.width, rect.height, rect.radius);
-                    ctx.stroke();
-                    ctx.closePath();
-                });
-        }
-
-        var rectangles = [
-            { x: 260, y: 60, width: 170, height: 15, radius: 10 },
-            { x: 260, y: 435, width: 170, height: 15, radius: 10 },
-            { x: 165, y: 130, width: 59, height: 20, radius: 10 },
-            { x: 470, y: 130, width: 59, height: 20, radius: 10 },
-            { x: 165, y: 330, width: 59, height: 20, radius: 10 },
-            { x: 470, y: 330, width: 59, height: 20, radius: 10 },
-
-        ];
-
-        //dibuja
-        drawRoundedRectangles(ctx, rectangles);
+            margen(ctx);
 
         </script>
 
