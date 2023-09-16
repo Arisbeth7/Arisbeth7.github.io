@@ -1,1 +1,237 @@
-# Examen-U2
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        canvas {
+            background-color: black;
+        }
+
+        body {
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <center>
+        <canvas width="700" height="500" id="myCanvas"></canvas>
+    </center>
+
+    <img src="guau.png" id="myImagen" style="display: none;" alt="">
+
+    <audio id="audioFondo" autoplay loop>
+        <source src="deadly-halloween.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="audioTeclado">
+        <source src="pacman-waka-waka.mp3" type="audio/mpeg">
+    </audio>
+
+        <script>
+        
+            var canvas = document.getElementById('myCanvas');
+            var ctx = canvas.getContext('2d');
+
+            var img = new Image();
+            img.src = "guau.png";
+
+
+            let x = 20;
+            let y = 20;
+
+            const velocidad = 10;
+
+            const imageList = [
+                { src: 'momia.png', width: 40, height: 40 },
+                { src: 'fantasma.png', width: 40, height: 40 },
+                { src: 'arana.png', width: 40, height: 40 },
+            ];
+
+            const randomImages = [];
+
+            function generateRandomImage() {
+                const randomIndex = Math.floor(Math.random() * imageList.length);
+                const randomX = Math.random() * (canvas.width - 40);
+                const randomY = Math.random() * (canvas.height - 40);
+
+                const newImage = {
+                    x: randomX,
+                    y: randomY,
+                    image: new Image(),
+                    width: 40,
+                    height: 40,
+                    dx: (Math.random() - 0.5) * velocidad,
+                    dy: (Math.random() - 0.5) * velocidad,
+                };
+                newImage.image.src = imageList[randomIndex].src;
+
+                randomImages.push(newImage);
+            }
+
+                function updateRandomImagesPosition() {
+                for (var i = 0; i < randomImages.length; i++) {
+                    var randomImage = randomImages[i];
+
+                    randomImage.x += randomImage.dx;
+                    randomImage.y += randomImage.dy;
+
+                    if (randomImage.x < 0 || randomImage.x + randomImage.width > canvas.width) {
+                        randomImage.dx *= -1;
+                    }
+                    if (randomImage.y < 0 || randomImage.y + randomImage.height > canvas.height) {
+                        randomImage.dy *= -1;
+                    }
+
+                    for (var j = 0; j < rectangles.length; j++) {
+                        var rectangle = rectangles[j];
+                        if (
+                            randomImage.x < rectangle.x + rectangle.width &&
+                            randomImage.x + randomImage.width > rectangle.x &&
+                            randomImage.y < rectangle.y + rectangle.height &&
+                            randomImage.y + randomImage.height > rectangle.y
+                        ) {
+                            randomImage.dx *= -1;
+                            randomImage.dy *= -1;
+                        }
+                    }
+                }
+            }
+
+
+            function drawRandomImages() {
+                for (var i = 0; i < randomImages.length; i++) {
+                    var randomImage = randomImages[i];
+                    ctx.drawImage(randomImage.image, randomImage.x, randomImage.y, randomImage.width, randomImage.height);
+                }
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                for (var i = 0; i < rectangles.length; i++) {
+                    ctx.beginPath();
+                    ctx.rect(rectangles[i].x, rectangles[i].y, rectangles[i].width, rectangles[i].height);
+                    ctx.fillStyle = 'blue'; 
+                    ctx.fill();
+                    ctx.closePath();
+                }
+                drawRandomImages();
+                ctx.drawImage(img, x, y, 35, 35);
+                margen(ctx);
+
+                updateRandomImagesPosition();
+
+                requestAnimationFrame(draw);
+            }
+
+            let rectangles = [
+                
+                { x: 260, y: 60, width: 170, height: 15, radius: 10 },
+                { x: 260, y: 435, width: 170, height: 15, radius: 10 },
+                { x: 165, y: 130, width: 59, height: 20, radius: 10 },
+                { x: 470, y: 130, width: 59, height: 20, radius: 10 },
+                { x: 165, y: 330, width: 59, height: 20, radius: 10 },
+                { x: 470, y: 330, width: 59, height: 20, radius: 10 },
+                { x: 270, y: 150, width: 160, height: 200, radius: 10 },
+                
+                { x: 190, y: 7, width: 25, height: 60,radius: 0},
+                { x: 471, y: 7, width: 25, height: 60,radius: 0},
+                { x: 190, y: 434, width: 25, height: 60,radius: 0},
+                { x: 471, y: 434, width: 25, height: 60,radius: 0},
+                //L
+                { x: 60, y: 95, width: 25, height: 60,radius: 0},
+                { x: 60, y: 75, width: 60, height: 20,radius: 0},
+                { x: 60, y: 364, width: 25, height: 60,radius: 0},
+                { x: 60, y: 423, width: 60, height: 20,radius: 0},
+                //L abajo
+                { x: 626, y: 95, width: 25, height: 60,radius: 0},
+                { x: 591, y: 75, width: 60, height: 20,radius: 0},
+                { x: 626, y: 364, width: 25, height: 60,radius: 0},
+                { x: 591, y: 423, width: 60, height: 20,radius: 0},
+            ];
+            
+            img.onload = function () {
+                generateRandomImage();
+                generateRandomImage();
+                generateRandomImage();
+                draw();
+            };
+
+            var audioTeclado = document.getElementById('audioTeclado');
+            document.addEventListener("keydown",function (e) {
+                var newX = x;
+                var newY = y;
+                
+                switch (e.keyCode) {
+                    case 87:
+                        newY -= velocidad;
+                        audioTeclado.play();
+                        break;
+
+                    case 83:
+                        newY += velocidad;
+                        audioTeclado.play();
+                        break;
+
+                    case 68:
+                        newX += velocidad;
+                        audioTeclado.play();
+                        break;
+
+                    case 65:
+                        newX -= velocidad;
+                        audioTeclado.play();
+                        break;
+                }
+
+                var collision = false;
+                for (var i = 0; i < rectangles.length; i++) {
+                    if (
+                        newX < rectangles[i].x + rectangles[i].width &&
+                        newX + 35 > rectangles[i].x &&
+                        newY < rectangles[i].y + rectangles[i].height &&
+                        newY + 35 > rectangles[i].y
+                    ) {
+                        collision = true;
+                        break;
+                    }
+                }
+
+                if (!collision) {
+                    x = newX;
+                    y = newY;
+                }
+            });
+
+            function margen(ctx) {
+                ctx.lineWidth = 6;
+                ctx.strokeStyle = "blue";
+
+                // Margen
+                ctx.beginPath();
+                ctx.moveTo(5, 5);
+                ctx.lineTo(5, 495);
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(5, 496);
+                ctx.lineTo(695, 495);
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(696, 496);
+                ctx.lineTo(696, 5);
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(695, 5);
+                ctx.lineTo(5, 5);
+                ctx.stroke();
+
+                ctx.lineWidth = 2.5;
+            }
+
+        </script>
+    </body>
+</html>
