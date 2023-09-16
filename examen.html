@@ -11,70 +11,98 @@
         }
     </style>
 </head>
+
 <body>
+    
 <center>
     <canvas width="700" height="500" id="myCanvas"></canvas>
 </center>
-<img src="minions_PNG54.png" id="mi_imagen" style="display: none;" alt="">
+<img src="guau.png" id="mi_imagen" style="display: none;" alt="">
+
 <script>
+   
     var canvas = document.getElementById('myCanvas');
     var ctx = canvas.getContext('2d');
 
     var img = new Image();
-    img.src = "minions_PNG54.png";
+    img.src = "guau.png";
 
     let x = 20;
     let y = 20;
 
     const velocidad = 10;
 
-    window.requestAnimationFrame = (function () {
-        return window.requestAnimationFrame ||
-            window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame ||
-            function (callback) {
-                window.setTimeout(callback, 17);
-            };
-    }());
+    const imageList = [
+        { src: 'momia.png', width: 40, height: 40 },
+        { src: 'fantasma.png', width: 40, height: 40 },
+        { src: 'arana.png', width: 40, height: 40 },
+    ];
 
-    function margen(ctx) {
-        ctx.lineWidth = 5;
-        ctx.strokeStyle = "blue";
+    const randomImages = [];
 
-        // Margen
-        ctx.beginPath();
-        ctx.moveTo(5, 5);
-        ctx.lineTo(5, 495);
-        ctx.stroke();
+    function generateRandomImage() {
+        const randomIndex = Math.floor(Math.random() * imageList.length);
+        const randomX = Math.random() * (canvas.width - 40);
+        const randomY = Math.random() * (canvas.height - 40);
 
-        ctx.beginPath();
-        ctx.moveTo(5, 496);
-        ctx.lineTo(695, 495);
-        ctx.stroke();
+        const newImage = {
+            x: randomX,
+            y: randomY,
+            image: new Image(),
+            width: 40,
+            height: 40,
+            dx: (Math.random() - 0.5) * velocidad,
+            dy: (Math.random() - 0.5) * velocidad,
+        };
+        newImage.image.src = imageList[randomIndex].src;
 
-        ctx.beginPath();
-        ctx.moveTo(696, 496);
-        ctx.lineTo(696, 5);
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.moveTo(695, 5);
-        ctx.lineTo(5, 5);
-        ctx.stroke();
-
-        ctx.lineWidth = 2.5;
+        randomImages.push(newImage);
     }
 
-    function drawRoundedRectangles(ctx, rectangles) {
-        rectangles.forEach(function (rect) {
+    function updateRandomImagesPosition() {
+        for (var i = 0; i < randomImages.length; i++) {
+            var randomImage = randomImages[i];
+
+            randomImage.x += randomImage.dx;
+            randomImage.y += randomImage.dy;
+
+            if (randomImage.x < 0 || randomImage.x + randomImage.width > canvas.width) {
+                randomImage.dx *= -1;
+            }
+            if (randomImage.y < 0 || randomImage.y + randomImage.height > canvas.height) {
+                randomImage.dy *= -1;
+            }
+        }
+    }
+
+    function drawRandomImages() {
+        for (var i = 0; i < randomImages.length; i++) {
+            var randomImage = randomImages[i];
+            ctx.drawImage(randomImage.image, randomImage.x, randomImage.y, randomImage.width, randomImage.height);
+        }
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (var i = 0; i < rectangles.length; i++) {
             ctx.beginPath();
-            roundedRect(ctx, rect.x, rect.y, rect.width, rect.height, rect.radius);
-            ctx.stroke();
+            ctx.rect(rectangles[i].x, rectangles[i].y, rectangles[i].width, rectangles[i].height);
+            ctx.fillStyle = 'blue'; 
+            ctx.fill();
             ctx.closePath();
-        });
+        }
+        drawRandomImages();
+        ctx.drawImage(img, x, y, 35, 35);
+        margen(ctx);
+
+        updateRandomImagesPosition();
+
+        requestAnimationFrame(draw);
     }
 
     let rectangles = [
+        
         { x: 260, y: 60, width: 170, height: 15, radius: 10 },
         { x: 260, y: 435, width: 170, height: 15, radius: 10 },
         { x: 165, y: 130, width: 59, height: 20, radius: 10 },
@@ -98,38 +126,12 @@
         { x: 626, y: 364, width: 25, height: 60,radius: 0},
         { x: 591, y: 423, width: 60, height: 20,radius: 0},
     ];
-
-    function roundedRect(ctx, x, y, width, height, radius) {
-        ctx.beginPath();
-        ctx.moveTo(x, y + radius);
-        ctx.arcTo(x, y + height, x + radius, y + height, radius);
-        ctx.arcTo(x + width, y + height, x + width, y + height - radius, radius);
-        ctx.arcTo(x + width, y, x + width - radius, y, radius);
-        ctx.arcTo(x, y, x, y + radius, radius);
-        ctx.stroke();
-    }
-
-    function drawRectangles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    for (var i = 0; i < rectangles.length; i++) {
-        ctx.beginPath();
-        ctx.rect(rectangles[i].x, rectangles[i].y, rectangles[i].width, rectangles[i].height);
-        ctx.fillStyle = 'blue'; 
-        ctx.fill();
-        ctx.closePath();
-    }
-
-    ctx.drawImage(img, x, y, 35, 35);
-    margen(ctx);
-    requestAnimationFrame(drawRectangles);
-}
-
-
-
+    
     img.onload = function () {
-        drawRectangles();
-        
+        generateRandomImage();
+        generateRandomImage();
+        generateRandomImage();
+        draw();
     };
 
     document.addEventListener("keydown", function (e) {
@@ -172,6 +174,34 @@
             y = newY;
         }
     });
+
+    function margen(ctx) {
+        ctx.lineWidth = 6;
+        ctx.strokeStyle = "blue";
+
+        // Margen
+        ctx.beginPath();
+        ctx.moveTo(5, 5);
+        ctx.lineTo(5, 495);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(5, 496);
+        ctx.lineTo(695, 495);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(696, 496);
+        ctx.lineTo(696, 5);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(695, 5);
+        ctx.lineTo(5, 5);
+        ctx.stroke();
+
+        ctx.lineWidth = 2.5;
+    }
 
 </script>
 </body>
